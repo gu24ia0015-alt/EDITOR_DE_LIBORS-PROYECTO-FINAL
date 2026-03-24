@@ -27,4 +27,8 @@ def add_book():
         return redirect(url_for('index'))
     return render_template('formulario.html', book=None)    
     
-    
+@app.route('/delete/<int:id>')
+def delete_book(id):
+    global books
+    books = [b for b in books if b['id'] != id]
+    return redirect(url_for('index'))    
