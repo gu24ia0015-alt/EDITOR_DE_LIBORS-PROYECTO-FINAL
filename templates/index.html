@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Libros | Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>📚 Mi Biblioteca Digital</h1>
+        </div>
+        <nav>
+            <a href="/add" class="btn-add">➕ Agregar Nuevo Libro</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="container">
+            {% if books %}
+                {% for book in books %}
+                <article class="card">
+                    <div class="card-content">
+                        <h3>{{ book.titulo }}</h3>
+                        <p><strong>Autor:</strong> {{ book.autor }}</p>
+                        <p><strong>Año:</strong> {{ book.anio }}</p>
+                        <p><strong>Género:</strong> {{ book.genero }}</p>
+                    </div>
+                    
+                    <div class="actions">
+                        <a href="/edit/{{ book.id }}" class="btn edit">✏️ Editar</a>
+                        
+                        <a href="/delete/{{ book.id }}" 
+                           class="btn delete" 
+                           onclick="return confirmarEliminar('{{ book.titulo }}')">
+                           🗑️ Eliminar
+                        </a>
+                    </div>
+                </article>
+                {% endfor %}
+            {% else %}
+                <div class="empty-state">
+                    <p>No hay libros en el catálogo. ¡Comienza agregando uno!</p>
+                </div>
+            {% endif %}
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - Proyecto CRUD Flask | Desarrollado Individualmente</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
