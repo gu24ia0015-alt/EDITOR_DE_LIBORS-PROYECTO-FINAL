@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestionar Libro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>{{ "Editar Libro" if book else "Añadir Libro" }}</h1>
+    <form method="POST">
+        <input type="text" name="titulo" placeholder="Título" value="{{ book.titulo if book else '' }}" required>
+        <input type="text" name="autor" placeholder="Autor" value="{{ book.autor if book else '' }}" required>
+        <input type="number" name="anio" placeholder="Año" value="{{ book.anio if book else '' }}" required>
+        <input type="text" name="genero" placeholder="Género" value="{{ book.genero if book else '' }}" required>
+        <button type="submit">Guardar</button>
+        <a href="/">Cancelar</a>
+    </form>
+</body>
+</html>
